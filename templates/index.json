@@ -26,6 +26,94 @@
         "featured_label": "Featured Product"
       }
     },
+    "home_category_Umh49M": {
+      "type": "home-category",
+      "blocks": {
+        "collection_nWyERB": {
+          "type": "collection",
+          "settings": {
+            "collection": "bongs-dab-rigs",
+            "show_badge": false,
+            "badge_text": "NEW"
+          }
+        },
+        "collection_mjWJVg": {
+          "type": "collection",
+          "settings": {
+            "collection": "rolling-papers-cones-wraps",
+            "custom_image": "shopify://shop_images/img.png",
+            "show_badge": false,
+            "badge_text": "NEW"
+          }
+        },
+        "collection_tPhaa4": {
+          "type": "collection",
+          "settings": {
+            "collection": "hand-pipes",
+            "show_badge": false,
+            "badge_text": "NEW"
+          }
+        },
+        "collection_AAGEr4": {
+          "type": "collection",
+          "settings": {
+            "collection": "lighters-torches-1",
+            "show_badge": false,
+            "badge_text": "NEW"
+          }
+        },
+        "collection_LFrhwf": {
+          "type": "collection",
+          "settings": {
+            "collection": "battaries",
+            "custom_image": "shopify://shop_images/img.png",
+            "show_badge": false,
+            "badge_text": "NEW"
+          }
+        },
+        "collection_UbcgfR": {
+          "type": "collection",
+          "settings": {
+            "collection": "odor-eliminators",
+            "show_badge": false,
+            "badge_text": "NEW"
+          }
+        },
+        "collection_yBAQ9x": {
+          "type": "collection",
+          "settings": {
+            "collection": "grinders",
+            "show_badge": false,
+            "badge_text": "NEW"
+          }
+        },
+        "collection_Gm7DDT": {
+          "type": "collection",
+          "settings": {
+            "collection": "dry-herb-concentrate-vaporizers",
+            "custom_image": "shopify://shop_images/img.png",
+            "show_badge": false,
+            "badge_text": "NEW"
+          }
+        }
+      },
+      "block_order": [
+        "collection_nWyERB",
+        "collection_mjWJVg",
+        "collection_tPhaa4",
+        "collection_AAGEr4",
+        "collection_LFrhwf",
+        "collection_UbcgfR",
+        "collection_yBAQ9x",
+        "collection_Gm7DDT"
+      ],
+      "name": "Category section",
+      "settings": {
+        "title": "Shop By Category",
+        "sub_title": "Explore our premium collection of wholesale glassware",
+        "view_all_url": "shopify://collections/all"
+      }
+    },
     "default-collection": {
       "type": "section-collection",
       "settings": {
@@ -45,6 +133,7 @@
   },
   "order": [
     "hero_48zTKR",
+    "home_category_Umh49M",
     "default-collection"
   ]
 }
