@@ -66,8 +66,9 @@
 
   {% render 'css-variables' %}
 
-  {{ 'theme.css' | asset_url | stylesheet_tag }}
   {{ 'tailwind-output.css' | asset_url | stylesheet_tag }}
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+
 
   <script>
 
