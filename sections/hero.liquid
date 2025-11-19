@@ -1,0 +1,331 @@
+ <section id="hero-section" data-hero-section-id="{{ section.id }}" class="relative min-h-[600px] md:h-[800px] flex items-center justify-center overflow-hidden md:mt-20">
+    <div class="absolute inset-0 bg-gradient-to-br from-dark via-darkLight to-dark"></div>
+    <div class="absolute inset-0 opacity-20">
+        <div class="absolute top-20 left-20 w-96 h-96 bg-primary/30 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-primaryDark/30 rounded-full blur-3xl"></div>
+    </div>
+    <div class="relative max-w-[1400px] mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center justify-center">
+        <div class="space-y-8">
+            <div class="inline-block px-4 py-2 bg-primary/10 border border-primary/30 rounded-full mt-8">
+                <span class="text-primary text-sm font-semibold tracking-wide">{{ section.settings.badge_label }}</span>
+            </div>
+            <h1 class="text-4xl sm:text-5xl lg:text-7xl font-black leading-tight tracking-tight text-white">
+                {{ section.settings.heading_prefix }} <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primaryDark">{{ section.settings.heading_highlight }}</span> {{ section.settings.heading_suffix }}
+            </h1>
+            <p class="text-base sm:text-lg lg:text-xl text-white/70 leading-relaxed max-w-xl">
+                {{ section.settings.subheading }}
+            </p>
+            <div class="flex flex-wrap items-center gap-3 sm:gap-4">
+                <a href="{{ section.settings.primary_button_link }}" class="bg-primary hover:bg-primaryDark text-dark hover:text-dark px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 hover:shadow-2xl hover:shadow-primary/50 hover:scale-105">
+                    {{ section.settings.primary_button_text }}
+                    <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+                <a href="{{ section.settings.secondary_button_link }}" class="border-2 border-white/20 hover:border-primary text-white hover:text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 hover:bg-primary/10">
+                    {{ section.settings.secondary_button_text }}
+                </a>
+            </div>
+            <div class="flex flex-wrap items-center gap-5 pt-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-shield-halved text-primary text-2xl"></i>
+                    <span class="text-sm font-medium text-white/80">Verified Quality</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-truck-fast text-primary text-2xl"></i>
+                    <span class="text-sm font-medium text-white/80">Fast Shipping</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-award text-primary text-2xl"></i>
+                    <span class="text-sm font-medium text-white/80">Premium Grade</span>
+                </div>
+            </div>
+        </div>
+        {% assign hero_collection = collections[section.settings.hero_collection] %}
+        <div class="relative h-[480px] sm:h-[440px] md:h-[520px] lg:h-[600px] overflow-hidden mt-10 md:mt-0">
+            <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-primaryDark/20 rounded-3xl"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent rounded-3xl"></div>
+            {% if hero_collection and hero_collection.products_count > 0 %}
+                <div class="absolute inset-0 flex items-center justify-center px-4 sm:px-6">
+                    <div class="h-full w-full max-w-xl sm:max-w-2xl py-6 flex flex-col justify-between" data-hero-carousel-root>
+                        <div class="relative h-full">
+                            <div class="overflow-hidden rounded-2xl h-full" data-hero-carousel-viewport>
+                                <div class="flex h-full" data-hero-carousel-track>
+                                    {% for product in hero_collection.products limit: 6 %}
+                                        <article class="w-full h-full flex-shrink-0">
+                                            <a href="{{ product.url }}" class="block h-full">
+                                                <div class="w-full h-[300px] sm:h-[440px] md:h-[300px] lg:h-[420px]  rounded-2xl overflow-hidden bg-white/5 mb-4">
+                                                    {% if product.featured_image %}
+                                                        <img class="w-full h-full object-cover" src="{{ product.featured_image | image_url: width: 700 }}" alt="{{ product.featured_image.alt | default: product.title }}" />
+                                                    {% else %}
+                                                        <div class="w-full h-full bg-white/10"></div>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="flex items-center justify-between bg-dark/80 backdrop-blur-xl border border-white/10 rounded-2xl p-6 ">
+                                                    <div>
+                                                        {% comment %} <p class="text-xs uppercase tracking-wide text-white/60">{{ product.vendor }}</p> {% endcomment %}
+                                                        <h4 class="text-lg sm:text-xl font-semibold text-white">{{ product.title }}</h4>
+                                                    </div>
+                                                    {% comment %} <div class="text-right">
+                                                        <p class="text-2xl font-black text-primary mt-1">{{ product.price | money }}</p>
+                                                    </div> {% endcomment %}
+                                                </div>
+                                            </a>
+                                        </article>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="flex justify-center gap-2 mt-1 relative z-10" data-hero-carousel-dots></div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="absolute bottom-8 left-8 right-8">
+                    <div class="bg-dark/80 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-white/60 font-medium">{{ section.settings.featured_label }}</p>
+                                <h3 class="text-2xl font-bold text-white mt-1">Diamond Series Pro</h3>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm text-white/60 font-medium">Wholesale Price</p>
+                                <p class="text-3xl font-black text-primary mt-1">$89.99</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <script>
+        (function () {
+            var script = document.currentScript;
+            if (!script) {
+                return;
+            }
+            var sectionRoot = script.closest('[data-hero-section-id]');
+            if (!sectionRoot) {
+                return;
+            }
+            var carouselRoot = sectionRoot.querySelector('[data-hero-carousel-root]');
+            if (!carouselRoot) {
+                return;
+            }
+            var track = carouselRoot.querySelector('[data-hero-carousel-track]');
+            var viewport = carouselRoot.querySelector('[data-hero-carousel-viewport]');
+            var dotsContainer = carouselRoot.querySelector('[data-hero-carousel-dots]');
+            if (!track || !viewport || !dotsContainer) {
+                return;
+            }
+            var slides = Array.prototype.slice.call(track.children);
+            if (!slides.length) {
+                return;
+            }
+            var currentIndex = 0;
+            var autoplayDelay = 3000;
+            var autoplayId = null;
+
+            track.style.transition = 'transform 0.35s ease';
+            track.style.willChange = 'transform';
+
+            function goTo(index) {
+                if (index < 0) {
+                    index = 0;
+                }
+                if (index > slides.length - 1) {
+                    index = slides.length - 1;
+                }
+                currentIndex = index;
+                track.style.transform = 'translateX(' + (-index * 100) + '%)';
+                updateDots();
+            }
+
+            function createDots() {
+                var html = slides.map(function (_slide, i) {
+                    return '<button type="button" data-index="' + i + '" class="w-3 h-3 sm:w-2.5 sm:h-2.5 rounded-full border border-white/70 bg-white/40 hover:bg-primary transition-colors"></button>';
+                }).join('');
+                dotsContainer.innerHTML = html;
+            }
+
+            function updateDots() {
+                var dots = dotsContainer.querySelectorAll('button[data-index]');
+                Array.prototype.forEach.call(dots, function (dot, i) {
+                    if (i === currentIndex) {
+                        dot.classList.add('bg-primary', 'border-primary', 'scale-110');
+                        dot.classList.remove('bg-white/40');
+                    } else {
+                        dot.classList.remove('bg-primary', 'border-primary', 'scale-110');
+                        dot.classList.add('bg-white/40');
+                    }
+                });
+            }
+
+            function startAutoplay() {
+                if (slides.length <= 1) {
+                    return;
+                }
+                if (autoplayId) {
+                    clearInterval(autoplayId);
+                }
+                autoplayId = setInterval(function () {
+                    var nextIndex = currentIndex + 1;
+                    if (nextIndex >= slides.length) {
+                        nextIndex = 0;
+                    }
+                    goTo(nextIndex);
+                }, autoplayDelay);
+            }
+
+            createDots();
+            updateDots();
+
+            dotsContainer.addEventListener('click', function (event) {
+                var target = event.target.closest('button[data-index]');
+                if (!target) {
+                    return;
+                }
+                var index = parseInt(target.getAttribute('data-index'), 10);
+                if (!isNaN(index)) {
+                    goTo(index);
+                    startAutoplay();
+                }
+            });
+
+            var startX = 0;
+            var currentX = 0;
+            var isDragging = false;
+
+            function onTouchStart(event) {
+                var touch = event.touches ? event.touches[0] : event;
+                startX = touch.clientX;
+                currentX = startX;
+                isDragging = true;
+                if (autoplayId) {
+                    clearInterval(autoplayId);
+                }
+            }
+
+            function onTouchMove(event) {
+                if (!isDragging) {
+                    return;
+                }
+                var touch = event.touches ? event.touches[0] : event;
+                currentX = touch.clientX;
+            }
+
+            function onTouchEnd() {
+                if (!isDragging) {
+                    return;
+                }
+                var deltaX = currentX - startX;
+                var threshold = 40;
+                if (Math.abs(deltaX) > threshold) {
+                    if (deltaX < 0 && currentIndex < slides.length - 1) {
+                        goTo(currentIndex + 1);
+                    } else if (deltaX > 0 && currentIndex > 0) {
+                        goTo(currentIndex - 1);
+                    }
+                    startAutoplay();
+                }
+                isDragging = false;
+            }
+
+            viewport.addEventListener('touchstart', onTouchStart, { passive: true });
+
+            viewport.addEventListener('touchmove', onTouchMove, { passive: true });
+            viewport.addEventListener('touchend', onTouchEnd);
+            viewport.addEventListener('mousedown', function (event) {
+                event.preventDefault();
+                onTouchStart(event);
+                window.addEventListener('mousemove', onTouchMove);
+                window.addEventListener('mouseup', function handleUp(upEvent) {
+                    window.removeEventListener('mousemove', onTouchMove);
+                    window.removeEventListener('mouseup', handleUp);
+                    onTouchEnd(upEvent);
+                });
+            });
+
+            goTo(0);
+            startAutoplay();
+        })();
+    </script>
+</section>
+
+{% schema %}
+{
+    "name": "Hero Section",
+    "settings": [
+        {
+            "type": "text",
+            "id": "badge_label",
+            "label": "Badge label",
+            "default": "PREMIUM WHOLESALE GLASSWARE"
+        },
+        {
+            "type": "text",
+            "id": "heading_prefix",
+            "label": "Heading prefix",
+            "default": "Elevate Your"
+        },
+        {
+            "type": "text",
+            "id": "heading_highlight",
+            "label": "Heading highlight",
+            "default": "Shop"
+        },
+        {
+            "type": "text",
+            "id": "heading_suffix",
+            "label": "Heading suffix",
+            "default": "Experience"
+        },
+        {
+            "type": "textarea",
+            "id": "subheading",
+            "label": "Subheading",
+            "default": "Built for cannabis dispensaries: massive assortment, retail-ready packaging, excellent price points, and shipping you can count on."
+        },
+        {
+            "type": "text",
+            "id": "primary_button_text",
+            "label": "Primary button text",
+            "default": "Shop Dispensary Essentials"
+        },
+        {
+            "type": "url",
+            "id": "primary_button_link",
+            "label": "Primary button link"
+        },
+        {
+            "type": "text",
+            "id": "secondary_button_text",
+            "label": "Secondary button text",
+            "default": "Browse Collections"
+        },
+        {
+            "type": "url",
+            "id": "secondary_button_link",
+            "label": "Secondary button link"
+        },
+        {
+            "type": "collection",
+            "id": "hero_collection",
+            "label": "Featured collection"
+        },
+        {
+            "type": "text",
+            "id": "featured_label",
+            "label": "Featured product label",
+            "default": "Featured Product"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Hero",
+            "category": "Custom",
+            "blocks": [
+
+ 
+            ]
+        }
+    ]
+}
+{% endschema %}
