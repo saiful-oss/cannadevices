@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  --color-*: initial;
   --color-primary: #10B981;
   --color-primaryDark: #059669;
   --color-dark: #0F172A;
@@ -13,4 +14,10 @@
     padding: 0;
     box-sizing: border-box;
   }
+}
+
+@layer utilities {
+    .bg-primary {
+        background-color: var(--color-primary);
+    }
 }
