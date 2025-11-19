@@ -6,3 +6,11 @@
   --color-dark: #0F172A;
   --color-darkLight: #1E293B;
 }
+
+@layer base {
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+}
