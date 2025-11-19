@@ -1,6 +1,6 @@
 <!-- /sections/footer.liquid -->
 
-<footer
+{% comment %} <footer
   class="footer"
   data-section-id="{{ section.id }}"
   data-section-type="footer"
@@ -148,4 +148,350 @@
     "groups": ["footer"]
   }
 }
+{% endschema %} {% endcomment %}
+
+
+<!-- /sections/footer.liquid -->
+
+<style>
+  {% if section.settings.footer_logo != blank %}
+    .footer__logo{
+      max-width: {{ section.settings.logo_max_width }}px;
+    }
+  {% endif %}
+</style>
+
+ {% comment %} <footer class="footer" data-section-id="{{ section.id }}" data-section-type="footer">
+  <div class="wrapper">
+    <div class="grid_changed">
+      <div class="grid__item medium-up--one-half">
+        {% if section.settings.footer_logo != blank %}
+          {% include 'dots', direction: 'down' %}
+          <div class="title-decoration"></div>
+          {% capture image_size %}{{ section.settings.logo_max_width | times: 1.5 | round }}x{% endcapture %}
+          <a href="{{ routes.root_url }}" class="site-logo footer__logo">
+            <img src="{{ section.settings.footer_logo | img_url: image_size }}"
+               srcset="{{ section.settings.footer_logo | img_url: image_size }} 1x, {{ section.settings.footer_logo | img_url: image_size, scale: 2 }} 2x"
+               alt="{{ section.settings.footer_logo.alt | default: shop.name }}">
+          </a>
+        {% endif %}
+        {%- if section.settings.footer_description.size > 0 -%}
+          <div class="rte footer__description">{{ section.settings.footer_description }}</div>
+        {%- endif -%}
+        <hr class="hidden-medium-up">
+      </div>
+      <div class="grid__item medium-up--one-half">
+        <div class="grid_changed">
+          <div class="grid__item one-half">
+            {%- assign footer_linklist = linklists[section.settings.footer_linklist] -%}
+            {% if footer_linklist.links.size > 0 %}
+              <ul class="footer__nav">
+                {% for link in footer_linklist.links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
+            {%- endif -%}
+          </div>
+          <div class="grid__item one-half">
+            {%- assign footer_second_linklist = linklists[section.settings.footer_second_linklist] -%}
+            {% if footer_second_linklist.links.size > 0 %}
+              <ul class="footer__nav">
+                {% for link in footer_second_linklist.links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr >
+
+    {% assign footer_count = 1 %}
+    {% assign footer_locale = false %}
+    {% assign footer_currency = false %}
+    {%- if section.settings.show_locale_selector and shop.published_locales.size > 1 -%}
+      {% assign footer_locale = true %}
+    {%- endif -%}
+    {%- if section.settings.show_currency_selector and shop.enabled_currencies.size > 1 -%}
+        {% assign footer_currency = true %}
+    {%- endif -%}
+
+    {%- if section.settings.footer_social_enable -%}{% assign footer_count = footer_count | plus: 1 %}{%- endif -%}
+    {%- if section.settings.footer_payment_enable -%}{% assign footer_count = footer_count | plus: 1 %}{%- endif -%}
+    {%- if footer_currency or footer_locale -%}{% assign footer_count = footer_count | plus: 1 %}{%- endif -%}
+
+    <div class="footer__bottom footer__bottom--{{footer_count}}">
+
+      {%- if footer_currency or footer_locale -%}
+        <div class="footer__item footer__item--selects">
+          {%- include 'cross-border' -%}
+        </div>
+      {%- endif -%}
+
+      <div class="footer__item footer__item--copyright">
+        <small>
+          {{ 'layout.footer.copyright' | t }} &copy; {{ shop.name }} {{ 'now' | date: "%Y" }}
+
+          <!-- Remove the following two lines to delete Powered by Shopify from your footer -->
+          <span class="divider-bar">|</span>
+          {{ powered_by_link }}
+          <!-- Stop deleting here -->
+        </small>
+       </div>
+
+       <div class="footer__item footer__item--social">
+        {% if section.settings.footer_social_enable %}
+        {%- assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo, LinkedIn,' | split: ', ' -%}
+        {% for social in social_accounts %}
+          {%- assign social_handle = social | handleize -%}
+          {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
+          {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
+          {% if settings[social_link] != blank %}
+            <a class="footer__icon footer__icon--social" href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
+              {% include social_icon %}
+              <span class="icon-fallback-text">{{ social }}</span>
+            </a>
+          {% endif %}
+        {% endfor %}
+        {% endif %}
+      </div>
+
+      {% if section.settings.footer_payment_enable %}
+        {% unless shop.enabled_payment_types == empty %}
+          <div class="footer__item footer__item--payment">
+            <span class="visually-hidden">{{ 'layout.footer.payment_methods' | t }}</span>
+            {% for type in shop.enabled_payment_types %}
+              <span class="footer__icon footer__icon--payment">
+                {{ type | payment_type_svg_tag: class:'payment-icon' }}
+                <span class="visually-hidden">{{ type | capitalize | replace: '_', ' ' }}</span>
+              </span>
+            {% endfor %}
+          </div>
+        {% endunless %}
+      {% endif %}
+    </div>
+  </div>
+</footer>   {% endcomment %}
+
+
+
+<footer id="footer" class="bg-darkLight border-t border-white/10 py-12 md:py-16">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 mb-10 md:mb-12">
+            <div class="sm:col-span-2">
+                <div class="text-2xl font-black tracking-tight mb-4">
+                   <a href="/">
+                    <span class="text-primary">CANNA</span><span class="text-white">DEVICES</span>
+                    </a>
+                </div>
+             
+                <p class="text-white/60 leading-relaxed mb-6">
+                    {{ section.settings.footer_description }}
+                </p>
+
+               {% if section.settings.footer_social_enable %}
+                <div class="flex items-center space-x-4">
+                    {% if settings.social_instagram_link != blank %}
+                      <a href="{{ settings.social_instagram_link }}" class="bg-dark hover:bg-primary text-white hover:text-dark w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                          <i class="fa-brands fa-instagram"></i>
+                      </a>
+                    {% endif %}
+
+                    {% if settings.social_facebook_link != blank %}
+                      <a href="{{ settings.social_facebook_link }}" class="bg-dark hover:bg-primary text-white hover:text-dark w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                          <i class="fa-brands fa-facebook"></i>
+                      </a>
+                    {% endif %}
+
+                    {% if settings.social_twitter_link != blank %}
+                      <a href="{{ settings.social_twitter_link }}" class="bg-dark hover:bg-primary text-white hover:text-dark w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                          <i class="fa-brands fa-twitter"></i>
+                      </a>
+                   {% endif %}
+
+                   {% if settings.social_linkedin_link != blank %}
+                    <a href="{{ settings.social_linkedin_link }}" class="bg-dark hover:bg-primary text-white hover:text-dark w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+            </div>
+
+            <div>
+                <h3 class="text-white font-bold text-lg mb-4">{{section.settings.first_menu_title}}</h3>
+                  {%- assign footer_first_linklist = linklists[section.settings.footer_first_linklist] -%}
+                  {% if footer_first_linklist.links.size > 0 %}
+                    <ul class="space-y-3">
+                      {% for link in footer_first_linklist.links %}
+                         <li><a href="{{ link.url }}" class="text-white/60 hover:text-primary transition-colors">{{ link.title }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  {%- endif -%}
+            </div>
+
+            <div>
+                <h3 class="text-white font-bold text-lg mb-4">{{section.settings.second_menu_title}}</h3>
+                  {%- assign footer_second_linklist = linklists[section.settings.footer_second_linklist] -%}
+                  {% if footer_second_linklist.links.size > 0 %}
+                    <ul class="space-y-3">
+                      {% for link in footer_second_linklist.links %}
+                         <li><a href="{{ link.url }}" class="text-white/60 hover:text-primary transition-colors">{{ link.title }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  {%- endif -%}
+            </div>
+
+            <div>
+                <h3 class="text-white font-bold text-lg mb-4">{{section.settings.third_menu_title}}</h3>
+                  {%- assign footer_third_linklist = linklists[section.settings.footer_third_linklist] -%}
+                  {% if footer_third_linklist.links.size > 0 %}
+                    <ul class="space-y-3">
+                      {% for link in footer_third_linklist.links %}
+                         <li><a href="{{ link.url }}" class="text-white/60 hover:text-primary transition-colors">{{ link.title }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  {%- endif -%}
+            </div>
+        </div>
+
+        <div class="border-t border-white/10 pt-6 md:pt-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <p class="text-white/50 text-xs sm:text-sm">{{ section.settings.footer_copyright }}</p>
+                <div class="flex flex-wrap items-center gap-4 sm:space-x-6">
+                    <a href="{{ section.settings.privacy_policy_link }}" class="text-white/50 hover:text-primary text-xs sm:text-sm transition-colors">Privacy Policy</a>
+                    <a href="{{ section.settings.terms_of_service_link }}" class="text-white/50 hover:text-primary text-xs sm:text-sm transition-colors">Terms of Service</a>
+                    <a href="{{ section.settings.cookie_policy_link }}" class="text-white/50 hover:text-primary text-xs sm:text-sm transition-colors">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "label": "Footer logo",
+        "type": "image_picker",
+        "id": "footer_logo",
+        "info": "400 x 200px .png"
+      },
+      {
+        "type": "range",
+        "id": "logo_max_width",
+        "min": 50,
+        "max": 450,
+        "step": 10,
+        "unit": "px",
+        "label": "Custom logo width",
+        "default": 250
+      },
+      {
+        "type": "text",
+        "id": "footer_description",
+        "label": "Description"
+      },
+      {
+        "type": "text",
+        "id": "first_menu_title",
+        "label": "First menu title",
+        "default": "Shop"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_first_linklist",
+        "label": "First menu",
+        "default": "main-menu",
+        "info": "This menu won't show dropdown items"
+      },
+      {
+        "type": "text",
+        "id": "second_menu_title",
+        "label": "Second menu title",
+        "default": "Wholesale"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_second_linklist",
+        "label": "Second menu",
+        "default": "footer",
+        "info": "This menu won't show dropdown items"
+      },
+      {
+        "type": "text",
+        "id": "third_menu_title",
+        "label": "Third menu title",
+        "default": "Support"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_third_linklist",
+        "label": "Third menu",
+        "default": "footer",
+        "info": "This menu won't show dropdown items"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_social_enable",
+        "label": "Show social icons",
+        "default": true,
+        "info": "Show icons for all links in your social media theme settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_payment_enable",
+        "label": "Show payment icons",
+        "default": true,
+        "info": "Show icons for payment providers enabled in your Shopify settings"
+      },
+      {
+        "type": "header",
+        "content": "language selector",
+        "info": "To add a language, go to your [language settings.](/admin/settings/languages)"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_locale_selector",
+        "label": "Show language selector",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Currency selector",
+        "info": "To add a currency, go to your [payment settings.](/admin/settings/payments)"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_currency_selector",
+        "label": "Show currency selector",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "footer_copyright",
+        "label": "Copyright text"
+      },
+      {
+       "type": "url",
+       "id": "privacy_policy_link",
+       "label": "Privacy policy link"
+      },
+      {
+       "type": "url",
+       "id": "terms_of_service_link",
+       "label": "Terms of sevice link"
+      },
+      {
+       "type": "url",
+       "id": "cookie_policy_link",
+       "label": "Cookie policy link"
+      }
+    ]
+  }
+
 {% endschema %}
