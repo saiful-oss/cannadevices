@@ -1,0 +1,147 @@
+{% assign total_products = 0 %}
+{% for product in collections.all.products %}
+    {% assign total_products = total_products | plus: 1 %}
+{% endfor %}
+
+<section id="category-grid" class="py-16 md:py-24 bg-darkLight">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10 md:mb-16">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black mb-3 sm:mb-4 text-white">{{ section.settings.title }}</h2>
+            <p class="text-base sm:text-lg md:text-xl text-white/70">{{ section.settings.sub_title }}</p>
+        </div>
+        
+        <div class="max-w-[1400px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 items-center justify-center">
+            {% for block in section.blocks %}
+                {% if block.type == 'collection' %}
+                 {% assign collection = collections[block.settings.collection] %}
+
+                    <div class="group relative bg-dark rounded-2xl overflow-hidden border border-white/10 hover:border-primary transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-primary/30">
+                        <a href="{{ collection.url }}" target="_blank">
+                            <div class="h-[240px] sm:h-[280px] md:h-[320px] overflow-hidden">
+                                {% if block.settings.custom_image %}
+                                    <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                                         src="{{ block.settings.custom_image | image_url: width: 600 }}" 
+                                         alt="{{ collection.title }}" 
+                                         loading="lazy" /> 
+                                    {% else %} 
+                                      <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                                         src="{{ collection.featured_image | image_url: width: 600 }}" 
+                                         alt="{{ collection.title }}" 
+                                         loading="lazy" />   
+                                {% endif %}    
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/50 to-transparent"></div>
+
+                            {% if block.settings.show_badge and block.settings.badge_text != blank %}
+                                <div class="absolute top-4 right-4">
+                                    <span class="bg-primaryDark text-white px-4 py-2 rounded-full text-sm font-bold">{{ block.settings.badge_text }}</span>
+                                </div>
+                            {% endif %}
+                            <div class="absolute bottom-0 left-0 right-0 p-6">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="text-2xl font-bold mb-1 text-white">{{ collection.title }}</h3>
+                                        <p class="text-white/60">{{ collection.products_count }}{% if collection.products_count <= 1 %} Product{% else %}+ Products{% endif %}</p>
+                                    </div>
+                                    <div class="bg-primary text-dark w-12 h-12 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                                        <i class="fa-solid fa-arrow-right text-lg"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+             {% endif %}
+            {% endfor %}
+
+
+
+            <div class="group relative bg-gradient-to-br from-primary to-primaryDark rounded-2xl overflow-hidden cursor-pointer hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/50">
+                <a href="{{ section.settings.view_all_url }}" target="_blank">
+                    <div class="h-[240px] sm:h-[280px] md:h-[320px] flex flex-col items-center justify-center p-8 text-center">
+                        <i class="fa-solid fa-grid-2-plus text-6xl text-dark mb-6"></i>
+                        <h3 class="text-3xl font-black text-dark mb-2">View All</h3>
+                        <p class="text-dark/80 text-lg font-medium">{{ shop.products_count }}+ Products</p>
+                    </div>
+                 </a>
+            </div> 
+            
+        </div>
+    </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Category section",
+  "settings": [
+        {          
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+        },
+        {          
+            "type": "text",
+            "id": "sub_title",
+            "label": "Sub title"
+        },
+        {
+          "type": "url",
+          "id": "view_all_url",
+          "label": "View All URL",
+          "default": "/collections"
+        },
+        
+    ],
+    "blocks": [
+
+     {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Image (Optional)",
+          "info": "Override the collection's featured image with a custom image"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_badge",
+          "label": "Show Badge",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Badge Text",
+          "default": "NEW"
+        }
+
+      ]
+    }
+  ],
+ "presets": [
+    {
+      "name": "Category section",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+
+{% endschema %}
