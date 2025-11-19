@@ -9,6 +9,23 @@
  */
 {
   "sections": {
+    "hero_48zTKR": {
+      "type": "hero",
+      "name": "Hero",
+      "settings": {
+        "badge_label": "PREMIUM WHOLESALE GLASSWARE",
+        "heading_prefix": "Elevate Your",
+        "heading_highlight": "Shop",
+        "heading_suffix": "Experience",
+        "subheading": "Built for cannabis dispensaries: massive assortment, retail-ready packaging, excellent price points, and shipping you can count on.",
+        "primary_button_text": "Shop Dispensary Essentials",
+        "primary_button_link": "",
+        "secondary_button_text": "Browse Collections",
+        "secondary_button_link": "",
+        "hero_collection": "bongs-dab-rigs",
+        "featured_label": "Featured Product"
+      }
+    },
     "default-collection": {
       "type": "section-collection",
       "settings": {
@@ -27,6 +44,7 @@
     }
   },
   "order": [
+    "hero_48zTKR",
     "default-collection"
   ]
 }
