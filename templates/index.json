@@ -26,22 +26,6 @@
         "featured_label": "Featured Product"
       }
     },
-    "default-collection": {
-      "type": "section-collection",
-      "settings": {
-        "title": "Our Best Sellers",
-        "description": "",
-        "collection": "",
-        "grid": 4,
-        "limit": 8,
-        "enable_slider": true,
-        "color_bg": "palette--light bg--neutral",
-        "show_view_all": false,
-        "width": "wrapper",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "home_category_Umh49M": {
       "type": "home-category",
       "blocks": {
@@ -94,6 +78,23 @@
             "show_badge": false,
             "badge_text": "NEW"
           }
+        },
+        "collection_yBAQ9x": {
+          "type": "collection",
+          "settings": {
+            "collection": "grinders",
+            "show_badge": false,
+            "badge_text": "NEW"
+          }
+        },
+        "collection_Gm7DDT": {
+          "type": "collection",
+          "settings": {
+            "collection": "dry-herb-concentrate-vaporizers",
+            "custom_image": "shopify://shop_images/img.png",
+            "show_badge": false,
+            "badge_text": "NEW"
+          }
         }
       },
       "block_order": [
@@ -102,7 +103,9 @@
         "collection_tPhaa4",
         "collection_AAGEr4",
         "collection_LFrhwf",
-        "collection_UbcgfR"
+        "collection_UbcgfR",
+        "collection_yBAQ9x",
+        "collection_Gm7DDT"
       ],
       "name": "Category section",
       "settings": {
@@ -110,11 +113,27 @@
         "sub_title": "Explore our premium collection of wholesale glassware",
         "view_all_url": "shopify://collections/all"
       }
+    },
+    "default-collection": {
+      "type": "section-collection",
+      "settings": {
+        "title": "Our Best Sellers",
+        "description": "",
+        "collection": "",
+        "grid": 4,
+        "limit": 8,
+        "enable_slider": true,
+        "color_bg": "palette--light bg--neutral",
+        "show_view_all": false,
+        "width": "wrapper",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
     "hero_48zTKR",
-    "default-collection",
-    "home_category_Umh49M"
+    "home_category_Umh49M",
+    "default-collection"
   ]
 }
