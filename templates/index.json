@@ -48,7 +48,7 @@
         "collection_nWyERB": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "bongs-dab-rigs",
             "show_badge": false,
             "badge_text": "NEW"
           }
@@ -56,7 +56,8 @@
         "collection_mjWJVg": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "rolling-papers-cones-wraps",
+            "custom_image": "shopify://shop_images/img.png",
             "show_badge": false,
             "badge_text": "NEW"
           }
@@ -64,7 +65,32 @@
         "collection_tPhaa4": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "hand-pipes",
+            "show_badge": false,
+            "badge_text": "NEW"
+          }
+        },
+        "collection_AAGEr4": {
+          "type": "collection",
+          "settings": {
+            "collection": "lighters-torches-1",
+            "show_badge": false,
+            "badge_text": "NEW"
+          }
+        },
+        "collection_LFrhwf": {
+          "type": "collection",
+          "settings": {
+            "collection": "battaries",
+            "custom_image": "shopify://shop_images/img.png",
+            "show_badge": false,
+            "badge_text": "NEW"
+          }
+        },
+        "collection_UbcgfR": {
+          "type": "collection",
+          "settings": {
+            "collection": "odor-eliminators",
             "show_badge": false,
             "badge_text": "NEW"
           }
@@ -73,7 +99,10 @@
       "block_order": [
         "collection_nWyERB",
         "collection_mjWJVg",
-        "collection_tPhaa4"
+        "collection_tPhaa4",
+        "collection_AAGEr4",
+        "collection_LFrhwf",
+        "collection_UbcgfR"
       ],
       "name": "Category section",
       "settings": {
