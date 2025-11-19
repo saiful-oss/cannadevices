@@ -11,8 +11,8 @@
   "current": {
     "type_heading_font": "inter_n7",
     "type_heading_size": 100,
-    "type_base_font": "poppins_n4",
-    "type_body_size": 90,
+    "type_base_font": "inter_n4",
+    "type_body_size": 100,
     "type_number_font": "poppins_n4",
     "type_number_size": 100,
     "color_nav_bg": "#ffffff",
