@@ -3165,16 +3165,16 @@ body.focus-enabled *:focus .product__media {
     - Based on CSS Wizardry grid
 ============================================================================== */
 .grid, .grid--full {
-  list-style: none;
+  /* list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0; */
   /* margin-left: calc(var(--gutter) * -1); */
 }
-.grid:after, .grid--full:after {
+/* .grid:after, .grid--full:after {
   content: "";
   display: table;
   clear: both;
-}
+} */
 @media only screen and (min-width: 768px) {
   .grid, .grid--full {
     /* padding-right: var(--gutter);
