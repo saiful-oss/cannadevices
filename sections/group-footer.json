@@ -16,21 +16,21 @@
       "settings": {
         "footer_logo": "{{ shop.brand.logo }}",
         "logo_max_width": 150,
-        "footer_description": "We believe in creating products that make a difference in your life. Every item we offer is carefully selected and crafted with quality and care, and we're dedicated to providing exceptional service to our valued customers.",
+        "footer_description": "Premium wholesale glassware supplier trusted by retailers nationwide. Quality products, competitive pricing, and exceptional service since 2015.",
         "first_menu_title": "Shop",
-        "footer_first_linklist": "main-menu",
+        "footer_first_linklist": "shop",
         "second_menu_title": "Wholesale",
-        "footer_second_linklist": "footer",
+        "footer_second_linklist": "wholesale",
         "third_menu_title": "Support",
-        "footer_third_linklist": "footer",
+        "footer_third_linklist": "support",
         "footer_social_enable": true,
-        "footer_payment_enable": true,
-        "show_locale_selector": true,
-        "show_currency_selector": true,
-        "footer_copyright": "",
-        "privacy_policy_link": "",
-        "terms_of_service_link": "",
-        "cookie_policy_link": ""
+        "footer_payment_enable": false,
+        "show_locale_selector": false,
+        "show_currency_selector": false,
+        "footer_copyright": "© 2024 CannaDevices. All rights reserved.",
+        "privacy_policy_link": "shopify://policies/privacy-policy",
+        "terms_of_service_link": "shopify://policies/terms-of-service",
+        "cookie_policy_link": "#"
       }
     },
     "subfooter": {
