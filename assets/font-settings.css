@@ -1,0 +1,131 @@
+
+@font-face {
+  font-family: Poppins;
+  font-weight: 700;
+  font-style: normal;
+  src: url("//cannadevices.com/cdn/fonts/poppins/poppins_n7.56758dcf284489feb014a026f3727f2f20a54626.woff2") format("woff2"),
+       url("//cannadevices.com/cdn/fonts/poppins/poppins_n7.f34f55d9b3d3205d2cd6f64955ff4b36f0cfd8da.woff") format("woff");
+}
+
+@font-face {
+  font-family: Poppins;
+  font-weight: 400;
+  font-style: normal;
+  src: url("//cannadevices.com/cdn/fonts/poppins/poppins_n4.0ba78fa5af9b0e1a374041b3ceaadf0a43b41362.woff2") format("woff2"),
+       url("//cannadevices.com/cdn/fonts/poppins/poppins_n4.214741a72ff2596839fc9760ee7a770386cf16ca.woff") format("woff");
+}
+
+@font-face {
+  font-family: Poppins;
+  font-weight: 400;
+  font-style: normal;
+  src: url("//cannadevices.com/cdn/fonts/poppins/poppins_n4.0ba78fa5af9b0e1a374041b3ceaadf0a43b41362.woff2") format("woff2"),
+       url("//cannadevices.com/cdn/fonts/poppins/poppins_n4.214741a72ff2596839fc9760ee7a770386cf16ca.woff") format("woff");
+}
+
+
+
+  @font-face {
+  font-family: Poppins;
+  font-weight: 600;
+  font-style: normal;
+  src: url("//cannadevices.com/cdn/fonts/poppins/poppins_n6.aa29d4918bc243723d56b59572e18228ed0786f6.woff2") format("woff2"),
+       url("//cannadevices.com/cdn/fonts/poppins/poppins_n6.5f815d845fe073750885d5b7e619ee00e8111208.woff") format("woff");
+}
+
+
+
+
+  @font-face {
+  font-family: Poppins;
+  font-weight: 500;
+  font-style: normal;
+  src: url("//cannadevices.com/cdn/fonts/poppins/poppins_n5.ad5b4b72b59a00358afc706450c864c3c8323842.woff2") format("woff2"),
+       url("//cannadevices.com/cdn/fonts/poppins/poppins_n5.33757fdf985af2d24b32fcd84c9a09224d4b2c39.woff") format("woff");
+}
+
+
+
+
+  @font-face {
+  font-family: Poppins;
+  font-weight: 800;
+  font-style: normal;
+  src: url("//cannadevices.com/cdn/fonts/poppins/poppins_n8.580200d05bca09e2e0c6f4c922047c227dfa8e8c.woff2") format("woff2"),
+       url("//cannadevices.com/cdn/fonts/poppins/poppins_n8.f4450f472fdcbe9e829f3583ebd559988f5a3d25.woff") format("woff");
+}
+
+
+
+
+  @font-face {
+  font-family: Poppins;
+  font-weight: 500;
+  font-style: normal;
+  src: url("//cannadevices.com/cdn/fonts/poppins/poppins_n5.ad5b4b72b59a00358afc706450c864c3c8323842.woff2") format("woff2"),
+       url("//cannadevices.com/cdn/fonts/poppins/poppins_n5.33757fdf985af2d24b32fcd84c9a09224d4b2c39.woff") format("woff");
+}
+
+
+
+
+
+
+
+
+
+
+  @font-face {
+  font-family: Poppins;
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url("//cannadevices.com/cdn/fonts/poppins/poppins_i4.846ad1e22474f856bd6b81ba4585a60799a9f5d2.woff2") format("woff2"),
+       url("//cannadevices.com/cdn/fonts/poppins/poppins_i4.56b43284e8b52fc64c1fd271f289a39e8477e9ec.woff") format("woff");
+}
+
+
+
+  @font-face {
+  font-family: Poppins;
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+  src: url("//cannadevices.com/cdn/fonts/poppins/poppins_i5.6acfce842c096080e34792078ef3cb7c3aad24d4.woff2") format("woff2"),
+       url("//cannadevices.com/cdn/fonts/poppins/poppins_i5.a49113e4fe0ad7fd7716bd237f1602cbec299b3c.woff") format("woff");
+}
+
+
+
+  @font-face {
+  font-family: Poppins;
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+  src: url("//cannadevices.com/cdn/fonts/poppins/poppins_i6.bb8044d6203f492888d626dafda3c2999253e8e9.woff2") format("woff2"),
+       url("//cannadevices.com/cdn/fonts/poppins/poppins_i6.e233dec1a61b1e7dead9f920159eda42280a02c3.woff") format("woff");
+}
+
+
+
+  @font-face {
+  font-family: Poppins;
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+  src: url("//cannadevices.com/cdn/fonts/poppins/poppins_i7.42fd71da11e9d101e1e6c7932199f925f9eea42d.woff2") format("woff2"),
+       url("//cannadevices.com/cdn/fonts/poppins/poppins_i7.ec8499dbd7616004e21155106d13837fff4cf556.woff") format("woff");
+}
+
+
+
+  @font-face {
+  font-family: Poppins;
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+  src: url("//cannadevices.com/cdn/fonts/poppins/poppins_i8.55af7c89c62b8603457a34c5936ad3b39f67e29c.woff2") format("woff2"),
+       url("//cannadevices.com/cdn/fonts/poppins/poppins_i8.1143b85f67a233999703c64471299cee6bc83160.woff") format("woff");
+}
+
+

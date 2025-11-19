@@ -1,0 +1,38 @@
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "footer_logo": "{{ shop.brand.logo }}",
+        "logo_max_width": 150,
+        "footer_description": "<p>We believe in creating products that make a difference in your life. Every item we offer is carefully selected and crafted with quality and care, and we're dedicated to providing exceptional service to our valued customers.</p>",
+        "footer_linklist": "main-menu",
+        "footer_second_linklist": "footer",
+        "width": "wrapper",
+        "padding_top": 136,
+        "padding_bottom": 64
+      }
+    },
+    "subfooter": {
+      "type": "subfooter",
+      "settings": {
+        "footer_social_enable": true,
+        "footer_payment_enable": true,
+        "enable_follow_on_shop": true,
+        "show_locale_selector": true,
+        "show_currency_selector": true,
+        "show_country_name": false,
+        "show_country_flag": true,
+        "width": "wrapper",
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    }
+  },
+  "order": [
+    "footer",
+    "subfooter"
+  ]
+}

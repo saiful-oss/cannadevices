@@ -1,0 +1,503 @@
+<!-- /snippets/product-form.liquid -->
+
+{%- liquid
+  assign buybutton_setting = false
+  assign gift_card_recipient_feature_active = false
+  assign current_variant = product.selected_or_first_available_variant
+  assign in_modal = enable_popup_trigger | default: false
+
+  if block.settings.enable_gift_card_recipient and product.gift_card?
+    assign gift_card_recipient_feature_active = true
+  endif
+
+  comment
+    Quick buy buttons are incompatible with gift card products and subscription products
+  endcomment
+
+  if block.settings.enable_payment_button and gift_card_recipient_feature_active == false
+    assign buybutton_setting = true
+  endif
+
+  if product.selling_plan_groups.size > 0
+    assign buybutton_setting = false
+  endif
+
+  assign buybutton_class = ''
+  if buybutton_setting
+    assign buybutton_class = 'product__form--buybutton'
+  endif
+
+  assign option_size_swatch = block.settings.option_size_swatch | default: 34
+-%}
+
+{% if block.settings.info_page != blank %}
+  {%- capture size_translation -%}{{ 'general.size_chart.size' | t }}{%- endcapture -%}
+  {%- liquid
+    assign size_chart_index = -1
+    assign size_translation = size_translation | lstrip | rstrip | downcase
+    for option in product.options
+      assign option_san = option | lstrip | rstrip | downcase
+      if option_san contains size_translation
+        assign size_chart_index = forloop.index0
+      endif
+    endfor
+    assign size_page = pages[block.settings.info_page]
+
+    assign action_style = 'product__info__link product__info__link--inline'
+    if size_chart_index == -1
+      assign action_style = 'product__info__link'
+    endif
+  -%}
+{% endif %}
+
+{% capture size_chart %}
+  {% if block.settings.info_page != blank %}
+    <a href="{{ size_page.url }}" class="{{ action_style }}" data-popup-{{ section.id }}="size-{{ section.id }}">
+      {{ size_page.title }}
+    </a>
+
+    <div class="modal micromodal-slide" id="size-{{ section.id }}" data-modal aria-hidden="true">
+      <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <button data-micromodal-close class="modal__close" aria-label="{{ 'general.accessibility.close' | t }}"></button>
+
+        <div class="modal__container modal__container--inline"
+        data-modal-content
+        role="dialog"
+        aria-modal="true"
+        aria-label="{{ size_page.title | strip_html | escape }}">
+          <div class="rte">{{ size_page.content }}</div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endcapture %}
+
+<div x-data="productForm()" data-morph-children-only data-product-handle="{{ product.handle }}">
+  <div
+    class="product__form__outer {{ buybutton_class }}"
+    {{ block.shopify_attributes }}
+  >
+    {%- assign product_form_id = 'product-form-' | append: section.id | append: '-' | append: product.id -%}
+
+    {% form 'product', product, id: product_form_id, data-product-handle: product.handle %}
+      {% comment %} The input with name="id" indicates the variant to add to cart {% endcomment %}
+      <input type="hidden" name="id" x-model.fill="variantId" value="{{ current_variant.id }}">
+
+      {% comment %} This will add a line item property called 'Preorder' to preorder products  {% endcomment %}
+      {%- if product.metafields.theme.preorder.type == 'boolean' and product.metafields.theme.preorder.value == true -%}
+        {% assign is_preorder = true %}
+        <input type="hidden" name="properties[{{ 'products.product.sale_type' | t }}]" value="{{ 'products.product.pre_order' | t }}">
+      {% endif %}
+
+      {% comment %} Shop pay split payment terms {% endcomment %}
+      <div class="shop-pay-terms">{{- form | payment_terms -}}</div>
+
+      {% unless product.has_only_default_variant %}
+        <div
+          class="form__selectors"
+          style="--OPTION-SIZE-SWATCH: {{ option_size_swatch }}px;"
+        >
+          {% for option in product.options_with_values %}
+            {% comment %} Use select over radio for long inputs and mismatched lengths {% endcomment %}
+            {%- liquid
+              assign longest_value = 0
+              assign shortest_value = 100
+              for value in option.values
+                if value.size > longest_value
+                  assign longest_value = value.size
+                endif
+
+                if value.size < shortest_value
+                  assign shortest_value = value.size
+                endif
+              endfor
+
+              assign lock_width_class = ''
+              assign chars_diff = longest_value | minus: shortest_value
+              if chars_diff < 5 and longest_value < 8
+                assign lock_width_class = 'radio__inputs--equal'
+              endif
+
+              assign variant_style = 'dropdown'
+              if block.settings.variant_form == 'button'
+                assign variant_style = 'button'
+              endif
+              if block.settings.variant_form == 'auto' and longest_value < 16
+                assign variant_style = 'button'
+              endif
+            -%}
+
+            {%- if settings.swatches_enable -%}
+              {% assign is_swatch_option = false %}
+
+              {% if option.values.first.swatch != null %}
+                {% comment %} New swatch {% endcomment %}
+                {% assign is_swatch_option = true %}
+              {% else %}
+                {% comment %} Determine if current option matches swatch handle translations {% endcomment %}
+                {%- capture swatch_translation -%}{{ 'general.swatches.color' | t }} {%- endcapture -%}
+                {%- assign translation_array = swatch_translation | append: ',' | split: ',' | uniq -%}
+                {%- assign is_swatch_option = false -%}
+                {%- assign option_handle = option.name | downcase | lstrip | rstrip | escape_once -%}
+
+                {%- for translation in translation_array -%}
+                  {%- assign translation_handle = translation | downcase | lstrip | rstrip | escape_once -%}
+
+                  {%- if translation_handle == option_handle -%}
+                    {% comment %} Old swatch {% endcomment %}
+                    {%- assign is_swatch_option = true -%}
+                    {% break %}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
+            {%- endif -%}
+
+            <div
+              class="selector-wrapper {% if is_swatch_option or variant_style == "button" %} selector-wrapper--fullwidth{% endif %} js"
+              data-split-select-wrapper
+              data-swapper-wrapper
+            >
+              {%- if variant_style == 'button' or is_swatch_option -%}
+                <fieldset class="radio__fieldset">
+                  <legend class="radio__legend" aria-label="{{ option.name | escape_once }}">
+                    <span class="radio__legend__label">{{ option.name | escape_once }}</span>
+
+                    <span
+                      class="radio__legend__value"
+                      data-swapper-target
+                    >
+                      {{- option.selected_value.name -}}
+                    </span>
+
+                    {%- if size_chart_index == forloop.index0 -%}
+                      {{ size_chart }}
+                    {%- endif -%}
+                  </legend>
+
+                  <div
+                    {% unless is_swatch_option %}
+                      class="radio__inputs {{ lock_width_class }}"
+                    {% endunless %}
+                  >
+                    {% for value in option.values %}
+                      {%- capture variant_url -%}
+                        {%- render 'product-form-variant-url',
+                          product: product,
+                          variant: value.variant,
+                          option_position: option.position,
+                          value_id: value.id
+                        -%}
+                      {%- endcapture -%}
+
+                      {% capture input_id %}{{ product.id }}-{{ block.id }}-{{ option.name | escape_once }}-{{ value | escape_once }}{% endcapture %}
+
+                      {%- if is_swatch_option -%}
+                        {% if value.swatch %}
+                          {% comment %} New swatch {% endcomment %}
+                          {% assign swatch_tag = 'div' %}
+                        {% else %}
+                          {% comment %} Old swatch {% endcomment %}
+                          {% assign swatch_tag = 'radio-swatch' %}
+                        {% endif %}
+
+                        <{{ swatch_tag }} class="swatch__button" data-tooltip="{{ value | escape_once }}">
+                          <input
+                            type="radio"
+                            name="options[{{ option.name | escape_once }}]"
+                            value="{{ value | escape_once }}"
+                            id="{{ input_id }}"
+                            data-swatch-input
+                            class="
+                              {% if value.variant.available == false %}
+                                sold-out
+                              {% endif %}
+                              {% if value.variant == null %}
+                                unavailable
+                              {% endif %}
+                            "
+                            @change="
+                              {% if value.product_url %}
+                                window.location.href = '{{- value.product_url -}}';
+                              {% elsif has_alt_text_filtered_images %}
+                                {% comment %} Reload the page completely to show grouped variant images without dealing with re-initialzing product media JS {% endcomment %}
+                                window.location.href = '{{- request.origin | append: variant_url -}}';
+                              {% else %}
+                                changeVariant('{{- request.origin | append: variant_url -}}', {{- value.variant.id | json -}}, {{- value.variant.featured_media.id | json -}});
+                              {% endif %}
+                            "
+                            {% if value.selected %}
+                              checked
+                            {% endif %}
+                          >
+
+                          <label
+                            for="{{ input_id }}"
+                            data-swapper-hover="{{ value | escape_once }}"
+                            {% comment %} Skip morphing to prevent breaking dynamic JS swatch color logic {% endcomment %}
+                            data-morph-skip
+                            {% unless has_alt_text_filtered_images %}
+                              x-intersect.once="preloadVariant('{{- variant_url -}}')"
+                            {% endunless %}
+                            {% if value.swatch != null %}
+                              data-swatch
+                              style="--swatch: {{ value.swatch.color }}"
+                            {% else %}
+                              data-swatch="{{ value | escape_once }}"
+                            {% endif %}
+                          >
+                            {% if value.swatch.image %}
+                              {{ value.swatch.image | image_url: width: option_size_swatch | image_tag: class: 'radio-swatch-image' }}
+                            {% endif %}
+                            <span class="visually-hidden">{{ value | escape_once }}</span>
+                            <span class="visually-hidden">{{ 'products.product.variant_sold_out_or_unavailable' | t }}</span>
+                          </label>
+                        </{{ swatch_tag }}>
+
+                      {%- else -%}
+                        {% comment %} radio button {% endcomment %}
+                        <span class="radio__button">
+                          <input
+                            type="radio"
+                            name="options[{{ option.name | escape_once }}]"
+                            value="{{ value | escape_once }}"
+                            id="{{ input_id }}"
+                            class="
+                              {% if value.variant.available == false %}
+                                sold-out
+                              {% endif %}
+                              {% if value.variant == null %}
+                                unavailable
+                              {% endif %}
+                            "
+                            @change="
+                              {% if value.product_url %}
+                                window.location.href = '{{- value.product_url -}}';
+                              {% elsif has_alt_text_filtered_images %}
+                                {% comment %} Reload the page completely to show grouped variant images without dealing with re-initialzing product media JS {% endcomment %}
+                                window.location.href = '{{- request.origin | append: variant_url -}}';
+                              {% else %}
+                                changeVariant('{{- request.origin | append: variant_url -}}', {{- value.variant.id | json -}}, {{- value.variant.featured_media.id | json -}});
+                              {% endif %}
+                            "
+                            {% if value.selected %}
+                              checked
+                            {% endif %}
+                          >
+
+                          <label
+                            for="{{ input_id }}"
+                            {% unless has_alt_text_filtered_images %}
+                              x-intersect.once="preloadVariant('{{- variant_url -}}')"
+                            {% endunless %}
+                          >
+                            <span>{{ value | escape_once }}</span>
+                            <span class="visually-hidden">{{ 'products.product.variant_sold_out_or_unavailable' | t }}</span>
+                          </label>
+                        </span>
+                      {%- endif -%}
+                    {% endfor %}
+                  </div>
+                </fieldset>
+              {%- else -%}
+                {%- assign selects_counter = selects_counter | plus: 1 -%}
+                <div class="select__fieldset">
+                  {% capture input_id %}{{ product.id }}-option-{{ option.position }}{% endcapture %}
+                  <legend class="radio__legend">
+                    <span class="radio__legend__label radio__legend__label--alt" id="{{ unique }}-select-{{ option.name | handle }}-label-{{ forloop.index }}">
+                      {{ option.name | escape_once }}
+
+                      {%- if size_chart_index == forloop.index0 -%}
+                        {{ size_chart }}
+                      {%- endif -%}
+                    </span>
+                  </legend>
+
+                  <popout-select>
+                    <div class="select-popout" data-popout data-popout-prevent="true">
+                      <button
+                        type="button"
+                        class="select-popout__toggle"
+                        aria-expanded="false"
+                        aria-controls="{{ unique }}-select-{{ option.name | handle }}-{{ forloop.index }}"
+                        aria-labelledby="{{ unique }}-select-{{ option.name | handle }}-label-{{ forloop.index }}"
+                        data-popout-toggle
+                      >
+                        {{ option.selected_value }}
+                      </button>
+
+                      <ul id="{{ unique }}-select-{{ option.name | handle }}-{{ forloop.index }}" class="select-popout__list" data-popout-list data-scroll-lock-scrollable>
+                        {% for value in option.values %}
+                          {%- capture variant_url -%}
+                            {%- render 'product-form-variant-url',
+                              product: product,
+                              variant: value.variant,
+                              option_position: option.position,
+                              value_id: value.id
+                            -%}
+                          {%- endcapture -%}
+                          <li class="select-popout__item {% if option.selected_value == value %}select-popout__item--current{% endif %}">
+                            <a
+                              class="select-popout__option"
+                              {% if value.product_url %}
+                                href="{{ value.product_url }}"
+                              {% else %}
+                                href="{{ variant_url }}"
+                                {% unless has_alt_text_filtered_images %}
+                                  @click.prevent="changeVariant('{{- request.origin | append: variant_url -}}', {{- value.variant.id | json -}}, {{- value.variant.featured_media.id | json -}});"
+                                  x-intersect.once="preloadVariant('{{- variant_url -}}')"
+                                {% endunless %}
+                              {% endif %}
+                              {% if option.selected_value == value -%}
+                                aria-current="true"
+                              {%- endif -%}
+                              data-value="{{ value | escape_once }}"
+                              data-popout-option
+                            >
+                              <span>
+                                {{ value | escape_once }}
+                              </span>
+                            </a>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                      <input
+                        type="hidden"
+                        name="options[{{ option.name | escape_once }}]"
+                        id="{{ input_id }}"
+                        value="{{ option.selected_value | escape_once }}"
+                        data-popout-input
+                        data-single-option-selector
+                        data-index="option{{ option.position }}"
+                      >
+                    </div>
+                  </popout-select>
+                </div>
+              {%- endif -%}
+            </div>
+          {% endfor %}
+        </div>
+      {% endunless %}
+
+      {% if block.settings.subscriptions_enable_selectors or in_modal %}
+        {% render 'product-subscription', product: product, block: block %}
+      {%- endif -%}
+
+      {% if block.settings.show_quantity %}
+        {% render 'product-quantity' %}
+      {% endif %}
+
+      {%- if block.settings.show_remaining or size_chart_index == -1 -%}
+        {% assign packed_class = '' %}
+        {%- if block.settings.show_remaining and size_chart_index == -1 -%}
+          {% assign packed_class = 'product__button__meta--packed' %}
+        {%- endif -%}
+
+        <div class="product__button__meta {{ packed_class }}">
+          {%- if size_chart_index == -1 -%}
+            {{ size_chart }}
+          {%- endif -%}
+
+          {%- if block.settings.show_remaining -%}
+            {% if current_variant.inventory_management == 'shopify' and current_variant.inventory_policy == 'deny' %}
+              {% liquid
+                assign current_inventory = current_variant.inventory_quantity
+                # The inventory at which the "countdown" begins, e.g. "Only 9 products left"
+                assign max_inventory = 10
+
+                assign is_in_stock = false
+                assign is_low_stock = false
+                assign is_out_of_stock = false
+
+                if current_variant.inventory_quantity > max_inventory
+                  assign is_in_stock = true
+                endif
+
+                if current_variant.inventory_quantity > 0 and current_variant.inventory_quantity <= max_inventory
+                  assign is_low_stock = true
+                endif
+
+                if current_variant.inventory_quantity < 1
+                  assign is_out_of_stock = true
+                endif
+              %}
+
+              <p class="variant__countdown {{ show_remaining_class }}">
+                {% if is_in_stock %}
+                  {% unless is_preorder %}
+                    <span class="variant__countdown--in">{{ 'products.product.in_stock' | t }}</span>
+                  {% endunless %}
+                {% elsif is_low_stock %}
+                  {% capture inventory %}
+                    <span>{{ current_inventory | default: 0 }} </span>
+                  {% endcapture %}
+                  <span class="variant__countdown--low">{{ 'products.product.remaining_html' | t: inventory: inventory }}</span>
+                {% elsif is_out_of_stock %}
+                  <span class="variant__countdown--out">{{ 'products.product.out_of_stock' | t }}</span>
+                {% else %}
+                  <span class="variant__countdown--unavailable">{{ 'products.product.item_unavailable' | t }}</span>
+                {% endif %}
+              </p>
+            {% endif %}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {% comment %}
+        Note: the gift card recipient form is controlled in Checkout and must contain these undocumented line item propeties:
+        * properties[__shopify_send_gift_card_to_recipient] - Hidden - Toggles the feature on/off in checkout, following properties have no effect without it
+        * properties[Recipient email] - The email of the gift card recipient
+        * properties[Recipient name] - The name of the gift card recipient
+        * properties[Message] - Shopify chose a highly generic name for the gift card message, this could easily conflict with an app or custom code
+      {% endcomment %}
+      {%- if gift_card_recipient_feature_active -%}
+        {%- render 'gift-card-recipient-form', product: product, form: form -%}
+      {%- endif -%}
+
+      <div class="product__submit" data-add-action-wrapper>
+        <div data-add-action-errors class="add-action-errors"></div>
+
+        {% assign button_text = 'products.product.add_to_cart' | t %}
+        {% if is_preorder %}
+          {% assign button_text = 'products.product.pre_order' | t %}
+        {% endif %}
+        {%- if current_variant == null -%}
+          {%- assign button_text = 'products.product.unavailable' | t -%}
+        {%- endif -%}
+        {%- if current_variant.available == false -%}
+          {%- assign button_text = 'products.product.sold_out' | t -%}
+        {%- endif -%}
+
+        <div class="product__submit__buttons">
+          <button
+            type="submit"
+            name="add"
+            class="product__submit__add"
+            data-add-to-cart
+            {% unless current_variant.available %}
+              disabled="disabled"
+            {% endunless %}
+          >
+            <span class="btn-state-ready">
+              <span>{{ button_text }}</span>
+            </span>
+
+            <span class="btn-state-loading">
+              <svg height="18" width="18" class="svg-loader">
+                <circle r="7" cx="9" cy="9" />
+                <circle stroke-dasharray="87.96459430051421 87.96459430051421" r="7" cx="9" cy="9" />
+              </svg>
+            </span>
+
+            <span class="btn-state-complete">&nbsp;</span>
+          </button>
+
+          {% if buybutton_setting %}
+            <div class="product__submit__quick">
+              {{ form | payment_button }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endform %}
+  </div>
+</div>

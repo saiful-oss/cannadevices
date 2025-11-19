@@ -1,0 +1,334 @@
+{
+  "sections": {
+    "main": {
+      "type": "product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "navigation": "none",
+            "text_size": 8,
+            "product_show_cutline": false,
+            "show_rating": true,
+            "show_rating_count": false,
+            "padding_bottom": 8
+          }
+        },
+        "958089c2-3900-4fc7-84de-e0b4c15c46b0": {
+          "type": "price",
+          "settings": {
+            "padding_bottom": 36
+          }
+        },
+        "0ac87f91-794e-410f-b3aa-9b69801000f0": {
+          "type": "siblings",
+          "settings": {
+
+
+            "padding_bottom": 8
+          }
+        },
+        "form": {
+          "type": "form",
+          "settings": {
+            "variant_form": "auto",
+            "show_quantity": true,
+            "show_remaining": true,
+            "enable_payment_button": true,
+            "enable_gift_card_recipient": true,
+            "subscriptions_enable_selectors": true,
+            "info_page": "",
+            "padding_bottom": 36
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "read_more": true,
+            "style": "accordions",
+            "description_icon": "",
+            "title_1": "",
+            "icon_name_1": "",
+            "raw_content_1": "<p>Orders can take 2-3 business days to process before shipping. As soon as your package has left our warehouse, you will receive a confirmation by email. </p>",
+            "title_2": "",
+            "icon_name_2": "",
+            "raw_content_2": "<p>If for any reason you are unhappy with your purchase we offer returns for store credit within 7 days of delivery. If 7 days have passed since your purchase has been delivered, unfortunately, we are unable to offer you a credit or exchange.</p>",
+            "title_3": "",
+            "icon_name_3": "icon-washer",
+            "raw_content_3": "",
+            "title_4": "",
+            "icon_name_4": "",
+            "raw_content_4": "",
+            "title_5": "",
+            "icon_name_5": "",
+            "raw_content_5": "",
+            "padding_bottom": 36
+          }
+        },
+        "icon-2": {
+          "type": "icon",
+          "disabled": true,
+          "settings": {
+            "icon_name": "icon-sewing-machine",
+            "icon_size": 20,
+            "icon_color": "#000000",
+            "show_icon_bg": true,
+            "text": "<p>Clean trade fair product</p>",
+            "padding_bottom": 8
+          }
+        },
+        "icon-1": {
+          "type": "icon",
+          "disabled": true,
+          "settings": {
+            "icon_name": "icon-recycled",
+            "icon_size": 20,
+            "icon_color": "#000000",
+            "show_icon_bg": true,
+            "text": "<p>Made with conscious fabrics</p>",
+            "padding_bottom": 8
+          }
+        },
+        "9ff7762b-24ce-41d9-9323-723fdcf41ec7": {
+          "type": "icon",
+          "disabled": true,
+          "settings": {
+            "icon_name": "icon-shipment",
+            "icon_size": 20,
+            "icon_color": "#000000",
+            "show_icon_bg": true,
+            "text": "<p>These products are real and amazing</p>",
+            "padding_bottom": 8
+          }
+        },
+        "dfddaf8b-4780-4021-88da-0c2da5eb6df9": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-thread",
+            "icon_size": 14,
+            "icon_color": "#060f9e",
+            "show_icon_bg": false,
+            "text": "<p>Blend of nylon, polyester and spandex</p>",
+            "padding_bottom": 8
+          }
+        },
+        "27d2fe77-1c57-448f-b6b7-eefa20ae9f68": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-water",
+            "icon_size": 14,
+            "icon_color": "#060f9e",
+            "show_icon_bg": false,
+            "text": "<p>Moisture-wicking</p>",
+            "padding_bottom": 8
+          }
+        },
+        "9e6cdcc2-8cd9-4fc8-9da7-5ceffdda30fe": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-ruler",
+            "icon_size": 14,
+            "icon_color": "#060f9e",
+            "show_icon_bg": false,
+            "text": "<p>Model wears a size Medium</p>",
+            "padding_bottom": 36
+          }
+        },
+        "40ad17f3-f5b9-4b14-9782-b7421e1327b8": {
+          "type": "icon",
+          "disabled": true,
+          "settings": {
+            "icon_name": "icon-award",
+            "icon_size": 20,
+            "icon_color": "#000000",
+            "show_icon_bg": true,
+            "text": "<p>Icon text</p>",
+            "padding_bottom": 8
+          }
+        },
+        "upsell": {
+          "type": "upsell",
+          "settings": {
+
+            "padding_bottom": 8
+          }
+        },
+        "pickup": {
+          "type": "pickup",
+          "disabled": true,
+          "settings": {
+            "padding_bottom": 8
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "958089c2-3900-4fc7-84de-e0b4c15c46b0",
+        "0ac87f91-794e-410f-b3aa-9b69801000f0",
+        "form",
+        "description",
+        "icon-2",
+        "icon-1",
+        "9ff7762b-24ce-41d9-9323-723fdcf41ec7",
+        "dfddaf8b-4780-4021-88da-0c2da5eb6df9",
+        "27d2fe77-1c57-448f-b6b7-eefa20ae9f68",
+        "9e6cdcc2-8cd9-4fc8-9da7-5ceffdda30fe",
+        "40ad17f3-f5b9-4b14-9782-b7421e1327b8",
+        "upsell",
+        "pickup"
+      ],
+      "settings": {
+        "bg": "palette--light bg--neutral",
+        "product_sticky_enable": true,
+        "image_layout": "mosaic",
+        "enable_video_looping": true,
+        "zoom_enable": true,
+        "width": "wrapper--full",
+        "padding_top": 36,
+        "padding_bottom": 64
+      }
+    },
+    "165362669813b7fc45": {
+      "type": "section-tabs",
+      "blocks": {
+        "1653626698e79330e0-0": {
+          "type": "text",
+          "settings": {
+            "title": "Product Details",
+            "text": "<p>Designed to blend style and performance, featuring high-quality materials and innovative designs to keep you comfortable and confident during your workouts.</p>"
+          }
+        },
+        "1653626698e79330e0-1": {
+          "type": "text",
+          "settings": {
+            "title": "Fabric & Care",
+            "text": "<p>Made of a blend of nylon, polyester and spandex.</p><p>Machine wash or hand wash, lay flat to dry.</p><p>Blend of nylon, polyester and spandex</p>"
+          }
+        },
+        "1653626698e79330e0-3": {
+          "type": "text",
+          "settings": {
+            "title": "Sizing & Fit",
+            "text": "<p>Customers are saying it fits true to size</p><p>Model wears a size Medium</p><p>Please review our Size Chart</p>"
+          }
+        },
+        "ada7c593-2ed5-4408-b6df-0cce3205cf50": {
+          "type": "text",
+          "settings": {
+            "title": "Shipping & Returns",
+            "text": "<p>Orders can take 2-3 business days to process before shipping. As soon as your package has left our warehouse, you will receive a confirmation by email. </p><p>If for any reason you are unhappy with your purchase we offer returns for store credit within 7 days of delivery. If 7 days have passed since your purchase has been delivered, unfortunately, we are unable to offer you a credit or exchange.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "1653626698e79330e0-0",
+        "1653626698e79330e0-1",
+        "1653626698e79330e0-3",
+        "ada7c593-2ed5-4408-b6df-0cce3205cf50"
+      ],
+      "settings": {
+        "color_bg": "palette--light bg--neutral",
+        "width": "wrapper",
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    },
+    "3fe8911c-001c-4c92-bf37-b1f1ee584781": {
+      "type": "section-row",
+      "settings": {
+        "shape": "none",
+        "aspect_ratio": 1,
+        "layout": "left",
+        "title": "Why we love this",
+        "text_size": 7,
+        "text": "<p>Super versatile! Suitable for gym, fashion and everything in between.  Made with premium, high-performance fabrics that move with your body, providing comfort and flexibility during every workout or activity. We want you to feel unrestricted and empowered to unleash your full potential.</p>",
+        "color_text_bg": "palette--light bg--accent",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "btn",
+        "button_color": "btn--neutral",
+        "color_bg": "palette--light bg--neutral",
+        "width": "wrapper",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "recent": {
+      "type": "section-recent-products",
+      "settings": {
+        "product_recently_heading": "You've recently viewed",
+        "product_recently_limit": 6,
+        "product_recently_minimum": 4,
+        "width": "wrapper",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "related": {
+      "type": "related",
+      "settings": {
+        "related_products_enable": true,
+        "limit": 6,
+        "product_recommendations_heading": "You may also like",
+        "width": "wrapper",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "0fba8d88-1eb1-421a-b035-c9b9c06251c2": {
+      "type": "section-hero",
+      "blocks": {
+        "88cd6385-eaa0-498b-aab6-9054e057b09b": {
+          "type": "kicker",
+          "settings": {
+            "kicker": "<p>Unleash your full potential</p>",
+            "enable_caps": true,
+            "text_size": 3
+          }
+        },
+        "template--16770260697321__0fba8d88-1eb1-421a-b035-c9b9c06251c2-168503979624d4b2f2-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Feeling good goes beyond just the physical</p>",
+            "text_size": 8
+          }
+        },
+        "template--16770260697321__0fba8d88-1eb1-421a-b035-c9b9c06251c2-168503979624d4b2f2-2": {
+          "type": "button",
+          "settings": {
+            "button_text": "Learn More",
+
+            "button_size": "",
+            "button_style": "hero__btn btn",
+            "button_color": "btn--white"
+          }
+        }
+      },
+      "block_order": [
+        "88cd6385-eaa0-498b-aab6-9054e057b09b",
+        "template--16770260697321__0fba8d88-1eb1-421a-b035-c9b9c06251c2-168503979624d4b2f2-0",
+        "template--16770260697321__0fba8d88-1eb1-421a-b035-c9b9c06251c2-168503979624d4b2f2-2"
+      ],
+      "settings": {
+        "height": "use_screen_two_thirds",
+        "overlay_opacity": 0,
+        "overlay_color": "#000000",
+        "flex_align": "align--middle-center",
+        "align_text": "text-center",
+        "color": "text--white",
+        "color_bg": "hero__content--transparent",
+        "width": "wrapper--none",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "165362669813b7fc45",
+    "3fe8911c-001c-4c92-bf37-b1f1ee584781",
+    "recent",
+    "related",
+    "0fba8d88-1eb1-421a-b035-c9b9c06251c2"
+  ]
+}

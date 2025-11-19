@@ -1,0 +1,43 @@
+<div class="full__page__form__wrapper">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item medium--three-quarters medium--push-one-eighth large-up--one-half large-up--push-one-quarter">
+        <div class="full__page__form">
+          <h1 class="h2 text-center">{{ 'customer.activate_account.title' | t }}</h1>
+          <p>{{ 'customer.activate_account.subtext' | t }}</p>
+
+          {% form 'activate_customer_password' %}
+            {{ form.errors | default_errors }}
+
+            <div class="form__field">
+              <label for="CustomerPassword">
+                {{ 'customer.activate_account.password' | t }}
+              </label>
+              <input
+                type="password"
+                name="customer[password]"
+                id="CustomerPassword"
+                placeholder="{{ 'customer.activate_account.password' | t }}"
+              >
+            </div>
+
+            <div class="form__field">
+              <label for="CustomerPasswordConfirmation">
+                {{ 'customer.activate_account.password_confirm' | t }}
+              </label>
+              <input
+                type="password"
+                name="customer[password_confirmation]"
+                id="CustomerPasswordConfirmation"
+                placeholder="{{ 'customer.activate_account.password_confirm' | t }}"
+              >
+            </div>
+
+            <input type="submit" class="btn btn--full btn--form" value="{{ 'customer.activate_account.submit' | t }}">
+            <input type="submit" class="btn btn--full btn--form btn--secondary" name="decline" value="{{ 'customer.activate_account.cancel' | t }}">
+          {% endform %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

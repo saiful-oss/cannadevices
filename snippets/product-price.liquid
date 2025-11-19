@@ -1,0 +1,129 @@
+<!-- /snippets/product-price.liquid -->
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign price = current_variant.price
+  assign compare_at_price = current_variant.compare_at_price
+
+  assign sale_type = block.settings.badge_sale_type
+
+  # Select current selling plan if it's specified in the URL
+  assign selected_selling_plan = product.selected_selling_plan
+  if product.requires_selling_plan
+    # Fallback to the first available selling plan
+    assign selected_selling_plan = product.selected_or_first_available_selling_plan_allocation.selling_plan | default: product.selling_plan_groups[0].selling_plans[0]
+  endif
+
+  assign sale_text = 'products.product.sale' | t
+
+  # Subscription price
+  if selected_selling_plan
+    assign sale_text = 'products.product.subscription' | t
+
+    # Make sure the variant exists(it isn't 'unavailable') and showing a price makes sense
+    if current_variant
+      assign price_adjustment = selected_selling_plan.price_adjustments[0]
+
+      case price_adjustment.value_type
+        when 'percentage'
+          assign sale_type = 'percentage'
+          assign plan_discount_amount = price | times: price_adjustment.value | divided_by: 100
+          assign compare_at_price = price
+          assign price = compare_at_price | minus: plan_discount_amount
+        when 'fixed_amount'
+          assign sale_type = 'dollar'
+          assign compare_at_price = price
+          assign price = compare_at_price | minus: price_adjustment.value
+        when 'price'
+          assign sale_type = 'dollar'
+          assign compare_at_price = price
+          assign price = price_adjustment.value
+      endcase
+    endif
+  endif
+-%}
+
+<div class="product__block product__price-block{{ classes }}" {{ block_style }} {{ block.shopify_attributes }}>
+  <div class="product__price__wrap">
+    <div class="product__price__main">
+      <span class="product__price">
+        <span class="{{ sale_class }}">
+          {%- if settings.currency_code_enable -%}
+            {{ price | money_with_currency }}
+          {%- else -%}
+            {{ price | money }}
+          {%- endif -%}
+        </span>
+      </span>
+
+      {% if compare_at_price > price or product.selected_selling_plan %}
+        {% case sale_type %}
+          {% when 'strike' %}
+            <span class="product__price--compare">
+              {%- if settings.currency_code_enable -%}
+                {{ compare_at_price | money_with_currency }}
+              {%- else -%}
+                {{ compare_at_price | money }}
+              {%- endif -%}
+            </span>
+          {% when 'percentage' %}
+            {% assign difference = compare_at_price | minus: price %}
+            {% assign percent_off = difference | times: 100 | divided_by: compare_at_price %}
+            <span class="product__price--off">
+              <span>{{ sale_text }}</span>
+              {% if percent_off > 0 %}
+                <em>•</em>
+                {{ 'products.product.save' | t }}
+                <span>{{ percent_off | floor | append: '%' }}</span>
+              {% endif %}
+            </span>
+          {% when 'dollar' %}
+            {% assign amount_off = compare_at_price | minus: price %}
+            <span class="product__price--off">
+              <span>{{ sale_text }}</span>
+              <em>•</em>
+              {{ 'products.product.save' | t }}
+              <span>{{ amount_off | money }}</span>
+            </span>
+        {% endcase %}
+      {% endif %}
+
+      {% if current_variant.unit_price != blank %}
+        {% capture show_units %}
+          {%- unless current_variant.unit_price -%}style="display: none;"{%- endunless -%}
+        {% endcapture %}
+        {% capture unit_price_separator %}
+          <span aria-hidden="true">/</span><span class="visually-hidden">{{ 'general.accessibility.unit_price_separator' | t }}&nbsp;</span>
+        {% endcapture %}
+        {% capture unit_price_base_unit %}
+          <span>
+            {% if current_variant.unit_price_measurement %}
+              {% if current_variant.unit_price_measurement.reference_value != 1 %}
+                {{ current_variant.unit_price_measurement.reference_value }}
+              {%- endif -%}
+              {{ current_variant.unit_price_measurement.reference_unit }}
+            {% endif %}
+          </span>
+        {% endcapture %}
+        <div class="product__price--unit">
+          <span {{ show_units }}>
+            <span class="visually-hidden visually-hidden--inline">{{ 'products.product.unit_price_label' | t }}</span>
+            <span id="unit-price-{{ block.id }}">
+              {%- if settings.currency_code_enable -%}
+                {{ current_variant.unit_price | money_with_currency }}
+              {%- else -%}
+                {{ current_variant.unit_price | money }}
+              {%- endif -%}
+            </span>
+            {{ unit_price_separator }}
+            <span id="unit-price-base-{{ block.id }}">{{ unit_price_base_unit }}</span>
+          </span>
+          <span class="hide">
+            {{ 'products.product.each' | t }}
+            <span></span>
+          </span>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

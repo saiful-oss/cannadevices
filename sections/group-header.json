@@ -1,0 +1,71 @@
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "header": {
+      "type": "header",
+      "blocks": {
+        "toolbar": {
+          "type": "toolbar",
+          "disabled": true,
+          "settings": {
+            "announcement_text": "<p>Free shipping on orders over $100</p>",
+            "secondary_linklist": "",
+            "show_menu_desktop": true,
+            "show_menu_mobile": true,
+            "show_locale_desktop": true,
+            "show_locale_mobile": true,
+            "show_country_name": false,
+            "show_country_flag": true,
+            "show_currency_desktop": true,
+            "show_currency_mobile": true
+          }
+        },
+        "image_CFUWpz": {
+          "type": "image",
+          "settings": {
+            "position": "1",
+            "aspect_ratio": 0.5,
+            "wide_image": true,
+            "title": "Pinned to item 1",
+            "link_text": "",
+            "link": "",
+            "color_text": "text--white"
+          }
+        },
+        "image_L87rwT": {
+          "type": "image",
+          "settings": {
+            "position": "1",
+            "aspect_ratio": 0.5,
+            "wide_image": true,
+            "title": "Pinned to item 1",
+            "link_text": "",
+            "link": "",
+            "color_text": "text--white"
+          }
+        }
+      },
+      "block_order": [
+        "toolbar",
+        "image_CFUWpz",
+        "image_L87rwT"
+      ],
+      "settings": {
+        "enable_header_sticky": false,
+        "header_style": "logo_beside",
+        "full_width": true,
+        "logo": "{{ shop.brand.logo }}",
+        "logo_max_limit": 130,
+        "main_menu_linklist": "main-menu",
+        "enable_search": true,
+        "enable_account": true,
+        "transparent_home": false,
+        "transparent_collection": false
+      }
+    }
+  },
+  "order": [
+    "header"
+  ]
+}

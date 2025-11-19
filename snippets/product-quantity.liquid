@@ -1,0 +1,40 @@
+<div
+  class="quantity__wrapper"
+  x-stepper
+  x-effect="quantity = $stepper.value"
+>
+  <button
+    type="button"
+    class="quantity__button quantity__button--minus"
+    x-stepper:minus
+    aria-label="{{ 'general.accessibility.decrease_quantity' | t }}"
+  >
+    &minus;
+  </button>
+  <input
+    class="quantity__input"
+    aria-label="{{ 'cart.label.quantity' | t }}"
+    type="number"
+    min="1"
+    name="quantity"
+    {% if uniq_id %}
+      form="{{ uniq_id }}"
+    {% endif %}
+    value="1"
+    x-stepper:input
+    {% comment %} This is for backwards compatibility with the old quantity selector that triggers 'change' when incrementing or decrementing {% endcomment %}
+    x-init="
+      $watch('quantity', () => {
+        $dispatch('change');
+      })
+    "
+  >
+  <button
+    type="button"
+    class="quantity__button quantity__button--plus"
+    x-stepper:plus
+    aria-label="{{ 'general.accessibility.increase_quantity' | t }}"
+  >
+    +
+  </button>
+</div>
