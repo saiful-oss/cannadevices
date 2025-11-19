@@ -8947,15 +8947,15 @@ body.default--dark {
 
 a,
 .text-link {
-  color: currentcolor;
+  /* color: currentcolor; */
   text-decoration: none;
   background: transparent;
 }
-a:hover, a:focus,
+/* a:hover, a:focus,
 .text-link:hover,
 .text-link:focus {
   color: currentcolor;
-}
+} */
 
 .text-link {
   color: var(--secondary);
