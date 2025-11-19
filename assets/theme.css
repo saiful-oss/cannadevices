@@ -3168,7 +3168,7 @@ body.focus-enabled *:focus .product__media {
   list-style: none;
   margin: 0;
   padding: 0;
-  margin-left: calc(var(--gutter) * -1);
+  /* margin-left: calc(var(--gutter) * -1); */
 }
 .grid:after, .grid--full:after {
   content: "";
@@ -3177,8 +3177,8 @@ body.focus-enabled *:focus .product__media {
 }
 @media only screen and (min-width: 768px) {
   .grid, .grid--full {
-    padding-right: var(--gutter);
-    margin-right: calc(var(--gutter) * -1);
+    /* padding-right: var(--gutter);
+    margin-right: calc(var(--gutter) * -1); */
     overflow: hidden;
   }
   .grid .flickity-viewport, .grid--full .flickity-viewport {
