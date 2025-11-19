@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "footer",
   "name": "Footer",
@@ -7,16 +16,26 @@
       "settings": {
         "footer_logo": "{{ shop.brand.logo }}",
         "logo_max_width": 150,
-        "footer_description": "<p>We believe in creating products that make a difference in your life. Every item we offer is carefully selected and crafted with quality and care, and we're dedicated to providing exceptional service to our valued customers.</p>",
-        "footer_linklist": "main-menu",
+        "footer_description": "We believe in creating products that make a difference in your life. Every item we offer is carefully selected and crafted with quality and care, and we're dedicated to providing exceptional service to our valued customers.",
+        "first_menu_title": "Shop",
+        "footer_first_linklist": "main-menu",
+        "second_menu_title": "Wholesale",
         "footer_second_linklist": "footer",
-        "width": "wrapper",
-        "padding_top": 136,
-        "padding_bottom": 64
+        "third_menu_title": "Support",
+        "footer_third_linklist": "footer",
+        "footer_social_enable": true,
+        "footer_payment_enable": true,
+        "show_locale_selector": true,
+        "show_currency_selector": true,
+        "footer_copyright": "",
+        "privacy_policy_link": "",
+        "terms_of_service_link": "",
+        "cookie_policy_link": ""
       }
     },
     "subfooter": {
       "type": "subfooter",
+      "disabled": true,
       "settings": {
         "footer_social_enable": true,
         "footer_payment_enable": true,
