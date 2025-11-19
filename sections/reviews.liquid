@@ -1,0 +1,242 @@
+<!-- /sections/index-reviews.liquid -->
+{% comment %} {%- assign slide_style = '3' -%}
+{% case section.blocks.size %}
+  {% when 1 %}
+    {%- assign slide_style = '1' -%}
+  {% when 2 %}
+    {%- assign slide_style = '2' -%}
+{% endcase %}
+
+<div class="index-reviews {{ section.settings.background_color }}" data-section-id="{{ section.id }}" data-section-type="reviews" data-slide-style="{{ slide_style }}" data-slide-count="{{ section.blocks.size }}">
+
+  <div class="wrapper">
+    {% if section.settings.title != blank %}
+      {% include 'dots', direction: 'down' %}
+      <div class="title-decoration"></div>
+      <h1 class="title--decorated">{{ section.settings.title | escape }}</h1>
+    {% endif %}
+    {% if section.settings.description != blank %}
+      <div class="rte--index rte">
+        {{ section.settings.description }}
+      </div>
+    {% endif %}
+    <div class="reviews reviews--{{ section.blocks.size }}">
+      <div class="review__dots medium-up--hide">
+        {% include 'dots', direction: 'right' %}
+      </div>
+      <div class="grid {% unless section.blocks.size == 5 %}grid--uniform{% endunless %}" data-reviews-slideshow>
+        {% for block in section.blocks %}
+          {% if block.settings.image != blank %}
+            {% assign img_object = block.settings.image %}
+          {% else %}
+            {%- assign img_object = 'blank.svg' | asset_url -%}
+          {% endif %}
+          <div class="grid__item review__item slide--{{ block.id }} slide--left" {{ block.shopify_attributes }}>
+            <div class="review__card">
+              <div class="review__image__align">
+                <div class="review__image__wrapper">
+                  <div class="background-size-cover lazyload" data-bgset="{% include 'bgset', image: img_object %}"></div>
+                  <noscript>
+                    <img src="{{ block.settings.image | img_url: '540x540', crop: 'center' }}" alt="{{ block.settings.image.alt | default: block.settings.title }}"/>
+                  </noscript>
+                </div>
+              </div>
+              <div class="review__card__text">
+                <div class="review__card__text__contents">
+                  {% if block.settings.title != blank %}
+                    <h2 class="review__name h3">{{ block.settings.title | escape }}</h2>
+                  {% endif %}
+
+                  {% if block.settings.job != blank %}
+                    <p class="review__title rte--index">{{ block.settings.job | escape }}</p>
+                  {% endif %}
+
+                  {%- if block.settings.stars > 0 -%}
+                    <ul class="review__stars unstyled">
+                      {% for i in (1..block.settings.stars) %}
+                        <li>{% include 'icon-star' %}</li>
+                      {% endfor %}
+                    </ul>
+                  {%- endif -%}
+
+                  {% if block.settings.text != blank %}
+                    <div class="review__content rte">{{ block.settings.text }}</div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% if section.blocks.size == 0 %}
+      {% include 'no-blocks' %}
+    {% endif %}
+  </div>
+</div> {% endcomment %}
+
+
+<section id="testimonials-section" class="py-12 sm:py-16 md:py-20 lg:py-24 bg-darkLight">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6">
+        <div class="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-2 sm:mb-4 text-white">Trusted by Dispensaries Nationwide</h2>
+            <p class="text-base sm:text-lg md:text-xl text-white/70">Discover Why They Choose Us</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <div class="bg-dark rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-white/10 hover:border-primary transition-all duration-300 hover:scale-105">
+                <div class="flex items-center space-x-1 text-yellow-400 mb-4">
+                    <i class="fa-solid fa-star text-sm sm:text-base"></i>
+                    <i class="fa-solid fa-star text-sm sm:text-base"></i>
+                    <i class="fa-solid fa-star text-sm sm:text-base"></i>
+                    <i class="fa-solid fa-star text-sm sm:text-base"></i>
+                    <i class="fa-solid fa-star text-sm sm:text-base"></i>
+                </div>
+                <p class="text-sm sm:text-base text-white/80 leading-relaxed mb-6">
+                    "CannaDevices has been our go-to supplier for over 3 years. The quality is unmatched and their customer service is phenomenal. Our customers love the products!"
+                </p>
+                <div class="flex items-center space-x-3 sm:space-x-4">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Customer" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
+                    <div>
+                        <p class="font-bold text-white text-sm sm:text-base">Michael Chen</p>
+                        <p class="text-xs sm:text-sm text-white/60">Owner, Cloud Nine Dispensary</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-dark rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-white/10 hover:border-primary transition-all duration-300 hover:scale-105">
+                <div class="flex items-center space-x-1 text-yellow-400 mb-4">
+                    <i class="fa-solid fa-star text-sm sm:text-base"></i>
+                    <i class="fa-solid fa-star text-sm sm:text-base"></i>
+                    <i class="fa-solid fa-star text-sm sm:text-base"></i>
+                    <i class="fa-solid fa-star text-sm sm:text-base"></i>
+                    <i class="fa-solid fa-star text-sm sm:text-base"></i>
+                </div>
+                <p class="text-sm sm:text-base text-white/80 leading-relaxed mb-6">
+                    "Best wholesale partner we've ever worked with. Fast shipping, great prices, and the product selection is incredible. Highly recommend to any retailer!"
+                </p>
+                <div class="flex items-center space-x-3 sm:space-x-4">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Customer" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
+                    <div>
+                        <p class="font-bold text-white text-sm sm:text-base">Sarah Martinez</p>
+                        <p class="text-xs sm:text-sm text-white/60">CEO, Green Leaf Collective</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-dark rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-white/10 hover:border-primary transition-all duration-300 hover:scale-105">
+                <div class="flex items-center space-x-1 text-yellow-400 mb-4">
+                    <i class="fa-solid fa-star text-sm sm:text-base"></i>
+                    <i class="fa-solid fa-star text-sm sm:text-base"></i>
+                    <i class="fa-solid fa-star text-sm sm:text-base"></i>
+                    <i class="fa-solid fa-star text-sm sm:text-base"></i>
+                    <i class="fa-solid fa-star text-sm sm:text-base"></i>
+                </div>
+                <p class="text-sm sm:text-base text-white/80 leading-relaxed mb-6">
+                    "The wholesale program is fantastic. We've increased our margins significantly while offering our customers premium quality products. Game changer!"
+                </p>
+                <div class="flex items-center space-x-3 sm:space-x-4">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="Customer" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
+                    <div>
+                        <p class="font-bold text-white text-sm sm:text-base">David Thompson</p>
+                        <p class="text-xs sm:text-sm text-white/60">Manager, High Society Store</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Testimonials"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Use this area to describe your testimonials."
+    },
+    {
+      "type": "select",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "index--gray",
+      "options": [
+        { "value": "index--white", "label": "White"},
+        { "value": "index--gray", "label": "Secondary"}
+      ]
+    }
+    ],
+    "blocks": [
+      {
+        "type": "review",
+        "name": "Testimonial",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Name",
+            "default": "Testimonial name"
+          },
+          {
+            "type": "text",
+            "id": "job",
+            "label": "Context",
+            "default": "Founder, Company"
+          },
+          {
+            "type":    "range",
+            "id":      "stars",
+            "min":     0,
+            "max":     5,
+            "step":    1,
+            "label":   "Stars",
+            "info":    "Set to zero to disable",
+            "default":  5
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Testimonial",
+            "default": "<p>Use this text to showcase a review from one of your customers.  A great review is honest and relatable.  A great reviewer is a person who represents your target audience and can speak to concerns that might block your customers from buying.</p>"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Testimonials",
+        "category": "Text",
+        "blocks": [
+          {
+            "type": "review"
+          },
+          {
+            "type": "review"
+          },
+          {
+            "type": "review"
+          },
+          {
+            "type": "review"
+          },
+          {
+            "type": "review"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

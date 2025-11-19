@@ -1,6 +1,6 @@
 <!-- /sections/section-newsletter.liquid -->
 
-<div
+{% comment %} <div
   class="newsletter {{ section.settings.color_bg }} {{ section.settings.text_color }}"
   data-section-id="{{ section.id }}"
   data-section-type="newsletter"
@@ -24,7 +24,50 @@
       </div>
     </div>
   </div>
-</div>
+</div> {% endcomment %}
+
+
+<section id="newsletter-section" class="py-16 md:py-24 bg-dark">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6">
+        <div class="bg-gradient-to-br from-darkLight to-dark rounded-3xl p-8 sm:p-12 lg:p-16 border border-white/10 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
+            
+            <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center">
+                <div>
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black mb-3 sm:mb-4 text-white">{{ section.settings.title | escape }}</h2>
+                    <p class="text-base sm:text-lg md:text-xl text-white/70 leading-relaxed">
+                       {{ section.settings.description }}
+                    </p>
+                    <div class="flex flex-wrap items-center gap-4 sm:gap-6 mt-6 sm:mt-8">
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-circle-check text-primary text-xl"></i>
+                            <span class="text-white/80">New arrivals first</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-circle-check text-primary text-xl"></i>
+                            <span class="text-white/80">Exclusive deals</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="bg-dark rounded-2xl p-6 sm:p-8 border border-white/10">
+                        <div class="flex flex-col sm:flex-row gap-3 sm:space-x-3">
+                            <div class="newsletter__button">
+                              {% include 'newsletter-form' %}
+                            </div>
+                        </div>
+                        <p class="text-xs text-white/50 mt-4">
+                            By subscribing, you agree to our Privacy Policy and consent to receive updates from CannaDevices.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 
 {% schema %}
 {
