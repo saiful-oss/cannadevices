@@ -36,7 +36,7 @@
     "color_success": "#51c88e",
     "color_warn": "#ffc896",
     "color_error": "#ff8484",
-    "layout_site_width": 1500,
+    "layout_site_width": 1400,
     "layout_container_enable": false,
     "radius_buttons": "rounded",
     "decoration_style": "decoration-none",
