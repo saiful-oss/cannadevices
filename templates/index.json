@@ -9,64 +9,6 @@
  */
 {
   "sections": {
-    "1654576607cd67ce3b": {
-      "type": "section-hero",
-      "blocks": {
-        "16545766078d58629f-0": {
-          "type": "heading",
-          "settings": {
-            "heading": "<p>Celebrate your strength</p>",
-            "text_size": 9
-          }
-        },
-        "16545766078d58629f-1": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Activewear for every shape</p>",
-            "text_size": 6,
-            "text_columns": 1
-          }
-        },
-        "16545766078d58629f-2": {
-          "type": "button",
-          "settings": {
-            "button_text": "View Products",
-            "button_url": "shopify://collections/all",
-            "button_size": "btn--large",
-            "button_style": "hero__btn btn",
-            "button_color": "btn--white"
-          }
-        },
-        "8d95cf32-6f97-462b-a5fe-e051a2c35dd3": {
-          "type": "button",
-          "settings": {
-            "button_text": "Learn More",
-            "button_url": "",
-            "button_size": "btn--large",
-            "button_style": "text-link",
-            "button_color": "btn--white"
-          }
-        }
-      },
-      "block_order": [
-        "16545766078d58629f-0",
-        "16545766078d58629f-1",
-        "16545766078d58629f-2",
-        "8d95cf32-6f97-462b-a5fe-e051a2c35dd3"
-      ],
-      "settings": {
-        "height": "use_screen_three_quarters",
-        "overlay_opacity": 0,
-        "overlay_color": "#00535b",
-        "flex_align": "align--bottom-center",
-        "align_text": "text-center",
-        "color": "text--white",
-        "color_bg": "hero__content--transparent",
-        "width": "wrapper--full",
-        "padding_top": 2,
-        "padding_bottom": 10
-      }
-    },
     "default-collection": {
       "type": "section-collection",
       "settings": {
@@ -85,7 +27,6 @@
     }
   },
   "order": [
-    "1654576607cd67ce3b",
     "default-collection"
   ]
 }
