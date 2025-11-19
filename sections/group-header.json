@@ -63,7 +63,7 @@
       "settings": {
         "enable_header_sticky": true,
         "header_style": "logo_beside",
-        "full_width": true,
+        "full_width": false,
         "logo": "{{ shop.brand.logo }}",
         "logo_max_limit": 130,
         "main_menu_linklist": "main-menu",
